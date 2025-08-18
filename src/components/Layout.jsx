@@ -1,5 +1,6 @@
 import { Outlet, NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import SideMenu from './SideMenu'
 
 // 樣式物件
 const styles = {
@@ -335,138 +336,13 @@ function Layout() {
       </nav>
 
       <div style={contentWrapperStyle}>
-        {/* 左側 SideMenu */}
-        <aside style={sideMenuStyle}>
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: sideCollapsed ? 'center' : 'flex-end',
-                padding: '6px',
-              }}
-            >
-              {/* collapse button */}
-              <button
-                onClick={() => setSideCollapsed(!sideCollapsed)}
-                style={collapseButtonStyle}
-                aria-label={sideCollapsed ? 'Expand menu' : 'Collapse menu'}
-                title={sideCollapsed ? 'Expand' : 'Collapse'}
-              >
-                {sideCollapsed ? '»' : '«'}
-              </button>
-            </div>
-
-            <nav style={{ flex: 1 }}>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '10px',
-                  alignItems: sideCollapsed ? 'center' : 'stretch',
-                }}
-              >
-                {/** 使用簡單 icon（文字或 emoji）在縮小時顯示 */}
-                <li>
-                  <NavLink
-                    to='/'
-                    style={({ isActive }) => ({
-                      color: isActive ? '#3498db' : '#ecf0f1',
-                      textDecoration: 'none',
-                      padding: sideCollapsed ? '8px' : '8px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: sideCollapsed ? 0 : 8,
-                      justifyContent: sideCollapsed ? 'center' : 'flex-start',
-                      borderRadius: '6px',
-                    })}
-                    title='首頁'
-                  >
-                    {sideCollapsed ? '🏠' : '首頁'}
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to='/about'
-                    style={({ isActive }) => ({
-                      color: isActive ? '#3498db' : '#ecf0f1',
-                      textDecoration: 'none',
-                      padding: sideCollapsed ? '8px' : '8px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: sideCollapsed ? 0 : 8,
-                      justifyContent: sideCollapsed ? 'center' : 'flex-start',
-                      borderRadius: '6px',
-                    })}
-                    title='關於我們'
-                  >
-                    {sideCollapsed ? 'ℹ️' : '關於我們'}
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to='/products'
-                    style={({ isActive }) => ({
-                      color: isActive ? '#3498db' : '#ecf0f1',
-                      textDecoration: 'none',
-                      padding: sideCollapsed ? '8px' : '8px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: sideCollapsed ? 0 : 8,
-                      justifyContent: sideCollapsed ? 'center' : 'flex-start',
-                      borderRadius: '6px',
-                    })}
-                    title='產品'
-                  >
-                    {sideCollapsed ? '📦' : '產品'}
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to='/grid-test'
-                    style={({ isActive }) => ({
-                      color: isActive ? '#3498db' : '#ecf0f1',
-                      textDecoration: 'none',
-                      padding: sideCollapsed ? '8px' : '8px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: sideCollapsed ? 0 : 8,
-                      justifyContent: sideCollapsed ? 'center' : 'flex-start',
-                      borderRadius: '6px',
-                    })}
-                    title='網格測試'
-                  >
-                    {sideCollapsed ? '🔲' : '網格測試'}
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink
-                    to='/contact'
-                    style={({ isActive }) => ({
-                      color: isActive ? '#3498db' : '#ecf0f1',
-                      textDecoration: 'none',
-                      padding: sideCollapsed ? '8px' : '8px 12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: sideCollapsed ? 0 : 8,
-                      justifyContent: sideCollapsed ? 'center' : 'flex-start',
-                      borderRadius: '6px',
-                    })}
-                    title='聯絡我們'
-                  >
-                    {sideCollapsed ? '✉️' : '聯絡我們'}
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </aside>
+        <SideMenu
+          sideCollapsed={sideCollapsed}
+          setSideCollapsed={setSideCollapsed}
+          windowWidth={windowWidth}
+          sideOpen={sideOpen}
+          setSideOpen={setSideOpen}
+        />
 
         <main style={{ ...(responsiveStyles.mainContent || styles.mainContent), flex: 1 }}>
           <Outlet />
