@@ -15,7 +15,9 @@
     "@progress/kendo-react-animation": "^11.1.0",
     "@progress/kendo-react-buttons": "^11.1.0",
     "@progress/kendo-react-grid": "^11.1.0",
+    "@progress/kendo-theme-bootstrap": "^11.3.2",
     "@progress/kendo-theme-default": "^11.0.2",
+    "@progress/kendo-theme-material": "^11.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2"
