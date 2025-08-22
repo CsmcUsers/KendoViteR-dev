@@ -58,12 +58,15 @@ const GridTest = (params) => {
             <h2>員工資料表格</h2>
             <p>這是一個使用 Kendo React Grid 的測試頁面，包含員工基本資料。</p>
 
+            <div className=''></div>
+
             <Grid
                 data={data}
                 dataItemKey='id'
                 autoProcessData={true}
                 pageable={true}
                 pageSize={10}
+                style={{ height: 400 }}
                 sortable={true}
                 // edit={edit}
                 // editable={{ mode: 'incell' }}
@@ -103,6 +106,10 @@ const GridTest = (params) => {
                     }}
                 />
             </Grid>
+
+            <div className='bg-blue-500 text-white p-4 rounded-lg'>
+                <h1 className='text-2xl font-bold'>Hello Tailwind!</h1>
+            </div>
         </div>
     );
 };

@@ -35,3 +35,144 @@
 .read-the-docs {
   color: #888;
 }
+
+.k-card .k-card-body {
+
+  font-size: 18px;
+  font-family: 'Fira Code', serif;
+}
+
+.k-card-title {
+  font-family: 'Fira Code', serif;
+  font-size: 20px;
+  color:  #fff;
+}
+
+.k-card-header {
+  background-color: #658cb1;
+}
+.k-card .k-card-body span {
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+}
+
+
+.k-grid-norecords-template {
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+  font-weight: 'bold';
+}
+
+.k-card .k-card-body {
+
+  font-size: 18px;
+  font-family: 'Fira Code', serif;
+}
+
+.k-card-title {
+  font-family: 'Fira Code', serif;
+  font-size: 20px;
+  color:  #fff;
+}
+
+.k-card-header {
+  background-color: #658cb1;
+}
+
+.k-card .k-card-body span {
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+}
+
+.k-grid-header .k-header {
+  padding: 5px;
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+}
+
+.GridNoHeader .k-grid-header
+{
+    height: 0;
+    border-bottom-width: 0;
+    display: none;
+    overflow: hidden;
+}
+
+.k-grid tbody tr {
+  line-height: 16px;
+}
+
+.k-grid tbody td {
+  padding-right: 5px;
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+}
+
+/* --------------------------------------------- */
+.k-dialog input,
+label,
+p {
+  padding-right: 5px;
+  font-size: 16px;
+  font-family: 'Fira Code', serif;
+}
+
+.k-dialog input.k-radio,
+.k-dialog input.k-checkbox {
+  padding-right: 0;
+}
+
+.k-dialog-title {
+  padding-right: 5px;
+  font-size: 20px;
+  font-family: 'Fira Code', serif;
+}
+
+/* --------------------------------------------- */
+.k-button {
+  font-size: 15px;
+  font-family: 'Fira Code', serif;
+  padding-block: 6px;
+  padding-inline: 12px;
+}
+
+.k-button-solid-error {
+  color: white
+}
+
+.k-button-solid-success{
+  color: white
+}
+
+.k-button-solid-warning{
+  font-weight: 'bold';
+}
+
+/* --------------------------------------------- */
+/* Kendo UI Menu 箭頭隱藏 */
+.k-menu-expand-arrow {
+  display: none !important;
+}
+
+.k-menu .k-menu-expand-arrow {
+  display: none !important;
+}
+
+.k-menu-item .k-menu-expand-arrow {
+  display: none !important;
+}
+
+/* 隱藏所有相關的展開圖示 */
+.k-menu .k-icon {
+  display: none !important;
+}
+
+.k-animation-container {
+  z-index: 10003;
+}
+.swal2-container {
+  z-index: 20003;
+}
+.k-dialog-wrapper {
+  z-index: 10003;
+}

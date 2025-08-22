@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* 完全重置邊距和內距，確保導航欄貼合瀏覽器邊緣 */
 * {
   margin: 0;
@@ -27,79 +29,19 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #3498db;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #2980b9;
-}
 
-body {
-  margin: 0;
-  padding: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: 2.5em;
-  line-height: 1.1;
-  color: #2c3e50;
-  margin: 1rem 0;
-}
-
-h2 {
-  color: #34495e;
-  margin: 0.8rem 0;
-}
-
-p {
-  margin: 0.5rem 0;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #3498db;
-  color: white;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-button:hover {
-  background-color: #2980b9;
-  transform: translateY(-1px);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+
   }
   a:hover {
     color: #747bff;
   }
-  button {
+  /* button {
     background-color: #f9f9f9;
-  }
+  } */
   body {
     margin: 0;
     padding: 0;
@@ -108,4 +50,21 @@ button:focus-visible {
     margin: 0;
     padding: 0;
   }
+}
+
+
+.row {
+  @apply grid grid-cols-1 md:grid-cols-12 py-2
+}
+
+.col3 {
+  @apply col-span-1 md:col-span-3
+}
+
+.col4 {
+  @apply col-span-1 md:col-span-4
+}
+
+.col12 {
+  @apply col-span-1 md:col-span-12
 }
