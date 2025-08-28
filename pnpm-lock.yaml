@@ -77,6 +77,9 @@ importers:
       '@progress/kendo-react-treeview':
         specifier: 11.4.0
         version: 11.4.0(@progress/kendo-licensing@1.7.1)(@progress/kendo-react-animation@11.4.0(@progress/kendo-licensing@1.7.1)(@progress/kendo-react-common@11.4.0(@progress/kendo-licensing@1.7.1)(@progress/kendo-svg-icons@4.5.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@progress/kendo-svg-icons@4.5.0)(react-dom@19.1.0(react@19.1.0))(react-transition-group@4.4.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0))(@progress/kendo-react-common@11.4.0(@progress/kendo-licensing@1.7.1)(@progress/kendo-svg-icons@4.5.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@progress/kendo-svg-icons@4.5.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@progress/kendo-svg-icons':
+        specifier: ^4.5.0
+        version: 4.5.0
       '@progress/kendo-theme-bootstrap':
         specifier: 11.3.2
         version: 11.3.2
@@ -92,6 +95,18 @@ importers:
       axios:
         specifier: 1.11.0
         version: 1.11.0
+      cldr-core:
+        specifier: ^47.0.0
+        version: 47.0.0
+      cldr-dates-full:
+        specifier: ^47.0.0
+        version: 47.0.0(cldr-numbers-full@47.0.0(cldr-core@47.0.0))
+      cldr-numbers-full:
+        specifier: ^47.0.0
+        version: 47.0.0(cldr-core@47.0.0)
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -1086,6 +1101,19 @@ packages:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
 
+  cldr-core@47.0.0:
+    resolution: {integrity: sha512-tdYRy66DMgpjEwVOWCTN0zhNr+zh1+d4A6MCNgJKU7voFDGsrwcWHor6jcqudHDmElCgyVNqWBKAB1JeNdSOKg==}
+
+  cldr-dates-full@47.0.0:
+    resolution: {integrity: sha512-XE/8oFMY1qnBF+FIvxGL+oSVnijb+Sw7BUVZoKaGTHqD5TRFi8AnO4bngOSzp1jmUamR+XDeLjodBia4mdNrsQ==}
+    peerDependencies:
+      cldr-numbers-full: 47.0.0
+
+  cldr-numbers-full@47.0.0:
+    resolution: {integrity: sha512-5OXUfjiAdXYuVD4XlaQe++WKBVmI1bkKxO0uWJMpbokzgcJ30vhFzcX5WsnZMtoZuhEpOt5KubCJaxaHPj5XTQ==}
+    peerDependencies:
+      cldr-core: 47.0.0
+
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -1113,6 +1141,9 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
@@ -2776,6 +2807,16 @@ snapshots:
 
   chownr@3.0.0: {}
 
+  cldr-core@47.0.0: {}
+
+  cldr-dates-full@47.0.0(cldr-numbers-full@47.0.0(cldr-core@47.0.0)):
+    dependencies:
+      cldr-numbers-full: 47.0.0(cldr-core@47.0.0)
+
+  cldr-numbers-full@47.0.0(cldr-core@47.0.0):
+    dependencies:
+      cldr-core: 47.0.0
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
@@ -2799,6 +2840,8 @@ snapshots:
       which: 2.0.2
 
   csstype@3.1.3: {}
+
+  dayjs@1.11.13: {}
 
   debug@4.4.1:
     dependencies:

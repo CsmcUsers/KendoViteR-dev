@@ -15,10 +15,6 @@ import {
 
 axios.defaults.withCredentials = true;
 
-/**
- * File API axios instance
- * @type {import('axios').AxiosInstance}
- */
 export const apiFile = axios.create({ baseURL: urlFile });
 
 export const apiMISPerson = axios.create({ baseURL: urlMISPerson });

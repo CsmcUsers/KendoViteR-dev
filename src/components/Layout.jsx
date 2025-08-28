@@ -1,7 +1,33 @@
-import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import SideMenu from './SideMenu';
-const appName = import.meta.env.VITE_APP_NAME;
+import { NavLink } from 'react-router-dom'
+import { IntlProvider, load, loadMessages, LocalizationProvider } from '@progress/kendo-react-intl'
+import { useState, useEffect } from 'react'
+import SideMenu from './SideMenu'
+import { language } from '@/data/language/Taiwan.js'
+
+// CLDR 數據導入
+import likelySubtags from 'cldr-core/supplemental/likelySubtags.json'
+import currencyData from 'cldr-core/supplemental/currencyData.json'
+import weekData from 'cldr-core/supplemental/weekData.json'
+import numbers from 'cldr-numbers-full/main/zh-Hant/numbers.json'
+import currencies from 'cldr-numbers-full/main/zh-Hant/currencies.json'
+import caGregorian from 'cldr-dates-full/main/zh-Hant/ca-gregorian.json'
+import dateFields from 'cldr-dates-full/main/zh-Hant/dateFields.json'
+import timeZoneNames from 'cldr-dates-full/main/zh-Hant/timeZoneNames.json'
+
+// 載入 CLDR 數據
+load(
+    likelySubtags,
+    currencyData,
+    weekData,
+    numbers,
+    currencies,
+    caGregorian,
+    dateFields,
+    timeZoneNames
+)
+loadMessages(language, 'zh-TW')
+
+const appName = import.meta.env.VITE_APP_NAME
 
 // 樣式物件
 const styles = {
@@ -76,12 +102,12 @@ const styles = {
         margin: '0',
         fontSize: '0.9rem',
     },
-};
+}
 
 // 響應式樣式
 const getResponsiveStyles = (windowWidth) => {
-    const isMobile = windowWidth <= 768;
-    const isSmallMobile = windowWidth <= 480;
+    const isMobile = windowWidth <= 768
+    const isSmallMobile = windowWidth <= 480
 
     if (isSmallMobile) {
         return {
@@ -112,7 +138,7 @@ const getResponsiveStyles = (windowWidth) => {
                 ...styles.mainContent,
                 padding: '15px 0',
             },
-        };
+        }
     } else if (isMobile) {
         return {
             navContainer: {
@@ -136,46 +162,46 @@ const getResponsiveStyles = (windowWidth) => {
                 ...styles.mainContent,
                 padding: '20px 0',
             },
-        };
+        }
     }
 
-    return styles;
-};
+    return styles
+}
 
 function Layout({ children }) {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [sideOpen, setSideOpen] = useState(window.innerWidth > 768);
-    const [sideCollapsed, setSideCollapsed] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [sideOpen, setSideOpen] = useState(window.innerWidth > 768)
+    const [sideCollapsed, setSideCollapsed] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowWidth(window.innerWidth);
+            setWindowWidth(window.innerWidth)
             // 同步 side menu 在大螢幕自動顯示、在小螢幕自動隱藏
             if (window.innerWidth > 768) {
-                setSideOpen(true);
+                setSideOpen(true)
             } else {
-                setSideOpen(false);
+                setSideOpen(false)
             }
-        };
+        }
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
-    const responsiveStyles = getResponsiveStyles(windowWidth);
+    const responsiveStyles = getResponsiveStyles(windowWidth)
 
     // hover 效果處理
     const handleNavLinkHover = (e, isHover) => {
         if (isHover) {
-            e.target.style.color = '#ecf0f1';
-            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            e.target.style.color = '#ecf0f1'
+            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'
         } else {
             if (!e.target.classList.contains('active')) {
-                e.target.style.color = '#bdc3c7';
-                e.target.style.backgroundColor = 'transparent';
+                e.target.style.color = '#bdc3c7'
+                e.target.style.backgroundColor = 'transparent'
             }
         }
-    };
+    }
 
     // 組合 side menu 在不同寬度下的樣式
     const contentWrapperStyle = {
@@ -184,7 +210,7 @@ function Layout({ children }) {
         // gap: '20px',
         width: '100%',
         boxSizing: 'border-box',
-    };
+    }
 
     // menu toggle button for small screens
     const menuToggleStyle = {
@@ -195,110 +221,122 @@ function Layout({ children }) {
         borderRadius: '6px',
         cursor: 'pointer',
         fontSize: '1.1rem',
-    };
+    }
 
     return (
-        <div style={styles.layout}>
-            <nav style={styles.navbar}>
-                <div style={responsiveStyles.navContainer || styles.navContainer}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        {/* 在小螢幕顯示切換按鈕 */}
-                        {windowWidth <= 768 && (
-                            <button
-                                onClick={() => setSideOpen(!sideOpen)}
-                                style={menuToggleStyle}
-                                aria-label='Toggle menu'
-                            >
-                                ☰
-                            </button>
-                        )}
-                        <h2 style={responsiveStyles.navLogo || styles.navLogo}>{appName}</h2>
-                    </div>
-                    <ul style={responsiveStyles.navMenu || styles.navMenu}>
-                        <li style={styles.navItem}>
-                            <NavLink
-                                to='/'
-                                style={({ isActive }) => ({
-                                    ...(responsiveStyles.navLink || styles.navLink),
-                                    ...(isActive ? styles.navLinkActive : {}),
-                                })}
-                                onMouseEnter={(e) => handleNavLinkHover(e, true)}
-                                onMouseLeave={(e) => handleNavLinkHover(e, false)}
-                            >
-                                首頁
-                            </NavLink>
-                        </li>
-                        <li style={styles.navItem}>
-                            <NavLink
-                                to='/about'
-                                style={({ isActive }) => ({
-                                    ...(responsiveStyles.navLink || styles.navLink),
-                                    ...(isActive ? styles.navLinkActive : {}),
-                                })}
-                                onMouseEnter={(e) => handleNavLinkHover(e, true)}
-                                onMouseLeave={(e) => handleNavLinkHover(e, false)}
-                            >
-                                關於我們
-                            </NavLink>
-                        </li>
-                        <li style={styles.navItem}>
-                            <NavLink
-                                to='/products'
-                                style={({ isActive }) => ({
-                                    ...(responsiveStyles.navLink || styles.navLink),
-                                    ...(isActive ? styles.navLinkActive : {}),
-                                })}
-                                onMouseEnter={(e) => handleNavLinkHover(e, true)}
-                                onMouseLeave={(e) => handleNavLinkHover(e, false)}
-                            >
-                                產品
-                            </NavLink>
-                        </li>
-                        <li style={styles.navItem}>
-                            <NavLink
-                                to='/grid-test'
-                                style={({ isActive }) => ({
-                                    ...(responsiveStyles.navLink || styles.navLink),
-                                    ...(isActive ? styles.navLinkActive : {}),
-                                })}
-                                onMouseEnter={(e) => handleNavLinkHover(e, true)}
-                                onMouseLeave={(e) => handleNavLinkHover(e, false)}
-                            >
-                                網格測試
-                            </NavLink>
-                        </li>
-                        <li style={styles.navItem}>
-                            <NavLink
-                                to='/contact'
-                                style={({ isActive }) => ({
-                                    ...(responsiveStyles.navLink || styles.navLink),
-                                    ...(isActive ? styles.navLinkActive : {}),
-                                })}
-                                onMouseEnter={(e) => handleNavLinkHover(e, true)}
-                                onMouseLeave={(e) => handleNavLinkHover(e, false)}
-                            >
-                                聯絡我們
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <LocalizationProvider language='zh-TW'>
+            <IntlProvider locale='zh-Hant'>
+                <div style={styles.layout}>
+                    <nav style={styles.navbar}>
+                        <div style={responsiveStyles.navContainer || styles.navContainer}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                {/* 在小螢幕顯示切換按鈕 */}
+                                {windowWidth <= 768 && (
+                                    <button
+                                        onClick={() => setSideOpen(!sideOpen)}
+                                        style={menuToggleStyle}
+                                        aria-label='Toggle menu'
+                                    >
+                                        ☰
+                                    </button>
+                                )}
+                                <h2 style={responsiveStyles.navLogo || styles.navLogo}>
+                                    {appName}
+                                </h2>
+                            </div>
+                            <ul style={responsiveStyles.navMenu || styles.navMenu}>
+                                <li style={styles.navItem}>
+                                    <NavLink
+                                        to='/'
+                                        style={({ isActive }) => ({
+                                            ...(responsiveStyles.navLink || styles.navLink),
+                                            ...(isActive ? styles.navLinkActive : {}),
+                                        })}
+                                        onMouseEnter={(e) => handleNavLinkHover(e, true)}
+                                        onMouseLeave={(e) => handleNavLinkHover(e, false)}
+                                    >
+                                        首頁
+                                    </NavLink>
+                                </li>
+                                <li style={styles.navItem}>
+                                    <NavLink
+                                        to='/about'
+                                        style={({ isActive }) => ({
+                                            ...(responsiveStyles.navLink || styles.navLink),
+                                            ...(isActive ? styles.navLinkActive : {}),
+                                        })}
+                                        onMouseEnter={(e) => handleNavLinkHover(e, true)}
+                                        onMouseLeave={(e) => handleNavLinkHover(e, false)}
+                                    >
+                                        關於我們
+                                    </NavLink>
+                                </li>
+                                <li style={styles.navItem}>
+                                    <NavLink
+                                        to='/products'
+                                        style={({ isActive }) => ({
+                                            ...(responsiveStyles.navLink || styles.navLink),
+                                            ...(isActive ? styles.navLinkActive : {}),
+                                        })}
+                                        onMouseEnter={(e) => handleNavLinkHover(e, true)}
+                                        onMouseLeave={(e) => handleNavLinkHover(e, false)}
+                                    >
+                                        產品
+                                    </NavLink>
+                                </li>
+                                <li style={styles.navItem}>
+                                    <NavLink
+                                        to='/grid-test'
+                                        style={({ isActive }) => ({
+                                            ...(responsiveStyles.navLink || styles.navLink),
+                                            ...(isActive ? styles.navLinkActive : {}),
+                                        })}
+                                        onMouseEnter={(e) => handleNavLinkHover(e, true)}
+                                        onMouseLeave={(e) => handleNavLinkHover(e, false)}
+                                    >
+                                        網格測試
+                                    </NavLink>
+                                </li>
+                                <li style={styles.navItem}>
+                                    <NavLink
+                                        to='/contact'
+                                        style={({ isActive }) => ({
+                                            ...(responsiveStyles.navLink || styles.navLink),
+                                            ...(isActive ? styles.navLinkActive : {}),
+                                        })}
+                                        onMouseEnter={(e) => handleNavLinkHover(e, true)}
+                                        onMouseLeave={(e) => handleNavLinkHover(e, false)}
+                                    >
+                                        聯絡我們
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
 
-            <div></div>
-            <div style={contentWrapperStyle}>
-                <SideMenu
-                    sideCollapsed={sideCollapsed}
-                    setSideCollapsed={setSideCollapsed}
-                    windowWidth={windowWidth}
-                    sideOpen={sideOpen}
-                    setSideOpen={setSideOpen}
-                />
-                <main style={{ ...(responsiveStyles.mainContent || styles.mainContent), flex: 1, height: '100%' }}>
-                    {children}
-                </main>
-            </div>
-        </div>
-    );
+                    <div></div>
+                    <div style={contentWrapperStyle}>
+                        <SideMenu
+                            sideCollapsed={sideCollapsed}
+                            setSideCollapsed={setSideCollapsed}
+                            windowWidth={windowWidth}
+                            sideOpen={sideOpen}
+                            setSideOpen={setSideOpen}
+                        />
+                        <main
+                            style={{
+                                ...(responsiveStyles.mainContent || styles.mainContent),
+                                flex: 1,
+                                height: '100%',
+                            }}
+                        >
+                            {children}
+                        </main>
+                    </div>
+                </div>
+            </IntlProvider>
+        </LocalizationProvider>
+    )
 }
 
-export default Layout;
+export default Layout

@@ -2,10 +2,10 @@
     "semi": false,
     "singleQuote": true,
     "tabWidth": 4,
-    "trailingComma": "es5",
     "printWidth": 100,
     "bracketSpacing": true,
     "jsxSingleQuote": true,
-    "endOfLine": "auto",
-    "quoteProps": "as-needed"
+    "endOfLine": "lf",
+    "quoteProps": "as-needed",
+    "trailingComma": "es5"
 }

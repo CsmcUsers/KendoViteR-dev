@@ -1,8 +1,12 @@
-import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout';
-import { apiFile } from '@/api';
-import { Button } from '@progress/kendo-react-buttons';
+import { apiFile } from '@/api'
+import { DPicker, DTPicker } from '@/components/date-input'
+import { Button } from '@progress/kendo-react-buttons'
+import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout'
+import { useState } from 'react'
 
 export default function Test07(props) {
+    const [pd, setPd] = useState(null)
+
     return (
         <div className='k-card-list'>
             <Card>
@@ -11,7 +15,7 @@ export default function Test07(props) {
                 </CardHeader>
                 <CardBody>
                     <div>
-                        <Button onClick={(f) => apiFile()}>call7777</Button>
+                        <Button onClick={() => apiFile()}>call7777</Button>
                     </div>
 
                     <div>{apiFile.defaults.baseURL}</div>
@@ -19,13 +23,21 @@ export default function Test07(props) {
             </Card>
             <Card>
                 <CardBody>
-                    <div>
-                        <Button onClick={(f) => apiFile()}>call7777</Button>
+                    <div className='row'>
+                        <div className='col3'>
+                            <Button onClick={() => apiFile()}>call7777</Button>
+                            <div>
+                                {apiFile.defaults.baseURL}
+                                <DPicker
+                                    size={'small'}
+                                    value={pd}
+                                    onChange={(p) => setPd(p.value)}
+                                />
+                            </div>
+                        </div>
                     </div>
-
-                    <div>{apiFile.defaults.baseURL}</div>
                 </CardBody>
             </Card>
         </div>
-    );
+    )
 }
