@@ -1,7 +1,7 @@
-import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout'
-import { apiFile } from '@/api'
-import { Button } from '@progress/kendo-react-buttons'
-import { Grid, GridColumn } from '@progress/kendo-react-grid'
+import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout';
+import { apiFile } from '@/api';
+import { Button } from '@progress/kendo-react-buttons';
+import { Grid, GridColumn } from '@progress/kendo-react-grid';
 const people = [
     {
         name: 'Calvin Hawkins',
@@ -18,7 +18,7 @@ const people = [
         email: 'ted.fox@example.com',
         image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
-]
+];
 
 export default function Test08(props) {
     return (
@@ -64,5 +64,5 @@ export default function Test08(props) {
                 </CardBody>
             </Card>
         </div>
-    )
+    );
 }

@@ -1,0 +1,16 @@
+/* .row + .row {
+    border-top:0;
+ } */
+
+ 
+
+ .myddclass {
+   .alert{ 
+     color: red;
+     font-size: 24px;}
+   .lll{ 
+      color: rgb(84, 20, 202);
+      font-size: 24px;}
+    color: rgb(71, 168, 84);
+    /* border: solid; */
+ }

@@ -1,8 +1,19 @@
-import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout';
+import { useMountedRef } from '@/share/common';
+import { useFlowContext, useTokenContext } from '@/share/context';
 import { Button } from '@progress/kendo-react-buttons';
-import { Grid, GridColumn } from '@progress/kendo-react-grid';
+import { Card, CardBody, CardHeader, CardTitle } from '@progress/kendo-react-layout';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const { userToken } = useTokenContext();
+    const navigate = useNavigate();
+
+    const { flowData } = useFlowContext();
+    const { refreshFlowData } = useFlowContext();
+
+    const mount = useMountedRef();
+
     const todos = [
         { id: 1, task: '完成專案報告', completed: false },
         { id: 2, task: '回覆客戶郵件', completed: true },
@@ -26,8 +37,44 @@ function Home() {
         { id: 3, title: '加班申請', applicant: '王小美', date: '2024-01-13', status: '待簽核' },
     ];
 
+    const refresh = async () => {
+        if (mount) {
+            await refreshFlowData();
+        }
+    };
+    useEffect(() => {
+        refresh();
+    }, [userToken?.UseID]);
+
     return (
         <div className='k-card-list p-6 space-y-6'>
+            {/* 簽核統計 */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>📊 簽核統計</CardTitle>
+                    <Button onClick={refresh} className='ml-auto'>
+                        重新整理
+                    </Button>
+                </CardHeader>
+                <CardBody>
+                    <div className='grid grid-cols-2 gap-6'>
+                        <div
+                            className='text-center p-4 bg-blue-50 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors'
+                            onClick={() => navigate('/flow/flow01')}
+                        >
+                            <div className='text-2xl font-bold text-blue-600'>{flowData.signlist?.length || 0}</div>
+                            <div className='text-sm text-gray-600'>待簽核清單</div>
+                        </div>
+                        <div
+                            className='text-center p-4 bg-red-50 rounded-lg cursor-pointer hover:bg-red-100 transition-colors'
+                            onClick={() => navigate('/flow/flow04')}
+                        >
+                            <div className='text-2xl font-bold text-red-600'>{flowData.returnlist?.length || 0}</div>
+                            <div className='text-sm text-gray-600'>被退回清單</div>
+                        </div>
+                    </div>
+                </CardBody>
+            </Card>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
                 {/* 代辦事項 */}
                 <Card>
@@ -85,21 +132,6 @@ function Home() {
                     </CardBody>
                 </Card>
             </div>
-
-            {/* 待簽核清單 */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>📝 待簽核清單 </CardTitle>
-                </CardHeader>
-                <CardBody>
-                    <Grid data={approvalList}>
-                        <GridColumn field='title' title='申請項目' />
-                        <GridColumn field='applicant' title='申請人' />
-                        <GridColumn field='date' title='申請日期' />
-                        <GridColumn field='status' title='狀態' />
-                    </Grid>
-                </CardBody>
-            </Card>
         </div>
     );
 }

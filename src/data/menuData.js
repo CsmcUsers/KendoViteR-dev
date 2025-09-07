@@ -15,7 +15,7 @@ export const menuData = [
         children: [
             { text: '產品列表', icon: '📋', url: '/products' },
             { text: '產品分類', icon: '🏷️', url: '/products/categories' },
-            { text: '新品上市', icon: '✨', url: '/products/new' },
+            { text: '新品上市', icon: '✨', children: [{ text: 'new1', icon: '✨', url: '/new/new1' }] },
         ],
     },
     {

@@ -33,15 +33,17 @@ export const DTPicker = ({ value, onChange, ...others }) => {
     return (
         <div>
             <DateTimePicker
+                size='small'
+                format={'yyyy-MM-dd HH:mm:ss'}
                 value={_.isNull(value) ? null : dayjs(value).toDate()}
                 onChange={(p) => {
-                    let isValid = dayjs(p.value, 'YYYY-MM-DD HH:mm:ss').isValid();
+                    let isValid = dayjs(p.value).isValid();
 
                     if (!isValid) {
                         onChange(null);
                         return;
                     }
-                    onChange(dayjs(p.value).format('YYYY-MM-DD HH:mm:ss'));
+                    onChange(dayjs(p.value).format());
                 }}
                 {...others}
             />

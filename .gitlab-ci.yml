@@ -1,0 +1,40 @@
+stages:
+    - build
+    - deploy
+
+variables:
+    NODE_VERSION: '23'
+
+build:
+    stage: build
+    image: node22.17.1_kendo:latest
+    cache:
+        paths:
+            - node_modules/
+            - .pnpm-store/
+    script:
+        - npx pnpm install
+        - npx pnpm build
+    artifacts:
+        paths:
+            - dist/
+        expire_in: 1 hour
+    only:
+        - dev
+
+deploy:
+    stage: deploy
+    image: docker:latest
+    services:
+        - docker:dind
+    before_script:
+        - apk add --no-cache docker-compose
+    script:
+        - mkdir -p /opt/gitlab/frontend-dist
+        - cp -r dist/* /opt/gitlab/frontend-dist/
+        - cd /opt/gitlab
+        - docker-compose restart frontend
+    dependencies:
+        - build
+    only:
+        - dev

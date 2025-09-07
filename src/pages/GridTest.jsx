@@ -1,4 +1,6 @@
 import { Grid, GridColumn as Column } from '@progress/kendo-react-grid';
+import { CardBody } from '@progress/kendo-react-layout';
+import { Card } from '@progress/kendo-react-layout';
 import React from 'react';
 
 // Mock data for the grid
@@ -54,62 +56,62 @@ const GridTest = (params) => {
     };
 
     return (
-        <div className='grid-test'>
-            <h2>員工資料表格</h2>
-            <p>這是一個使用 Kendo React Grid 的測試頁面，包含員工基本資料。</p>
+        <div className='k-card-list'>
+            <Card>
+                <CardBody>
+                    <h2>員工資料表格</h2>
+                    <p>這是一個使用 Kendo React Grid 的測試頁面，包含員工基本資料。</p>
 
-            <div className=''></div>
+                    <div className=''></div>
 
-            <Grid
-                data={data}
-                dataItemKey='id'
-                autoProcessData={true}
-                pageable={true}
-                pageSize={10}
-                style={{ height: 400 }}
-                sortable={true}
-                // edit={edit}
-                // editable={{ mode: 'incell' }}
-                // onEditChange={handleEditChange}
-                // onItemChange={itemChange}
-            >
-                <Column field='id' title='員工編號' width='100px' />
-                <Column field='name' title='姓名' width='120px' />
-                <Column field='age' title='年齡' width='80px' />
-                <Column field='position' title='職位' width='150px' />
-                <Column field='department' title='部門' width='120px' />
-                <Column
-                    field='salary'
-                    title='薪資'
-                    width='120px'
-                    format='{0:c0}'
-                    cells={{
-                        data: (props) => (
-                            <td style={{ textAlign: 'right', color: '#2c3e50', fontWeight: '500' }}>
-                                NT$ {props.dataItem.salary.toLocaleString()}
-                            </td>
-                        ),
-                        edit: (props) => (
-                            <td>
-                                <input
-                                    type='number'
-                                    value={props.dataItem.salary}
-                                    style={{
-                                        width: '100%',
-                                        padding: '8px',
-                                        borderRadius: '4px',
-                                        border: '1px solid #ddd',
-                                    }}
-                                />
-                            </td>
-                        ),
-                    }}
-                />
-            </Grid>
+                    <Grid
+                        data={data}
+                        dataItemKey='id'
+                        autoProcessData={true}
+                        pageable={true}
+                        pageSize={10}
+                        style={{ height: 400 }}
+                        sortable={true}
+                    >
+                        <Column field='id' title='員工編號' width='100px' />
+                        <Column field='name' title='姓名' width='120px' />
+                        <Column field='age' title='年齡' width='80px' />
+                        <Column field='position' title='職位' width='150px' />
+                        <Column field='department' title='部門' width='120px' />
+                        <Column
+                            field='salary'
+                            title='薪資'
+                            width='120px'
+                            format='{0:c0}'
+                            cells={{
+                                data: (props) => (
+                                    <td style={{ textAlign: 'right', color: '#2c3e50', fontWeight: '500' }}>
+                                        NT$ {props.dataItem.salary.toLocaleString()}
+                                    </td>
+                                ),
+                                edit: (props) => (
+                                    <td>
+                                        <input
+                                            type='number'
+                                            value={props.dataItem.salary}
+                                            style={{
+                                                width: '100%',
+                                                padding: '8px',
+                                                borderRadius: '4px',
+                                                border: '1px solid #ddd',
+                                            }}
+                                        />
+                                    </td>
+                                ),
+                            }}
+                        />
+                    </Grid>
 
-            <div className='bg-blue-500 text-white p-4 rounded-lg'>
-                <h1 className='text-2xl font-bold'>Hello Tailwind!</h1>
-            </div>
+                    <div className='bg-blue-500 text-white p-4 rounded-lg'>
+                        <h1 className='text-2xl font-bold'>Hello Tailwind!</h1>
+                    </div>
+                </CardBody>
+            </Card>
         </div>
     );
 };

@@ -11,7 +11,7 @@ import {
     urlVideoStream,
     urlAnnounce,
     urlESGApi,
-} from '../share/setting';
+} from '@/share/setting';
 
 axios.defaults.withCredentials = true;
 
@@ -58,7 +58,7 @@ export const apiFileDeleteFileByFuncId_PK = (funcId, pk = null, strPk = null) =>
     apiFile.post('DeleteFileByFuncId_PK', { funcId, pk, strPk });
 
 export const apiFile_ExploreFiles = ({ filetype, selectDir }) => {
-    let front_env = process.env.REACT_APP_TEST;
+    let front_env = import.meta.env.VITE_APP_TEST;
     return apiFile.post('ExploreBigFiles', { filetype, front_env, selectDir });
 };
 
@@ -108,10 +108,10 @@ export const apiFuncAuth = axios.create({ baseURL: urlFuncAuth });
 
 export const apiVideoStream = axios.create({ baseURL: urlVideoStream });
 
-export const apiVideoStream_GetSourceURL = ({ filePk, front_env = process.env.REACT_APP_TEST }) =>
+export const apiVideoStream_GetSourceURL = ({ filePk, front_env = import.meta.env.VITE_APP_TEST }) =>
     `${urlVideoStream}/GetVideoStream/${filePk}?front_env=${front_env}`;
 
-export const apiVideoStream_GetVideoStream = ({ filePk, front_env = process.env.REACT_APP_TEST }) =>
+export const apiVideoStream_GetVideoStream = ({ filePk, front_env = import.meta.env.VITE_APP_TEST }) =>
     apiVideoStream.get(`GetVideoStream/${filePk}?front_env=${front_env}`);
 
 export const apiAnnounce = axios.create({ baseURL: urlAnnounce });

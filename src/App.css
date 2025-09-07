@@ -56,11 +56,10 @@
   font-family: 'Fira Code', serif;
 }
 
-
-.k-grid-norecords-template {
+.k-grid-norecords div {
   font-size: 16px;
   font-family: 'Fira Code', serif;
-  font-weight: 'bold';
+  font-weight: bold;
 }
 
 .k-card .k-card-body {
@@ -175,4 +174,10 @@ p {
 }
 .k-dialog-wrapper {
   z-index: 10003;
+}
+
+.k-list-content .k-list-item {
+    font-family: 'Fira Code', serif;
+    font-size: 14px;
+    font-weight: normal;
 }
